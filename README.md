@@ -31,9 +31,38 @@ With the optional '-p' option, it will also output the fllowing informatio in th
 5. Melting Temperature (&deg;C)
 6. Molecular Weight (g/mol)
 
+## Requirements
+### Required dependecies 
+Dependencies for script:
+```
+python 3.2 or above
+pandas 2.2.1 or above
+```
+The rest are standard Python libraries.
+
 #### Running the script
 ```
 python fast2csv.py filename.fasta [-p]
 python fast2csv.py filename.fastq [-p]
-
 ```
+
+### Examples
+#### Input FastA file
+
+\>DNA1<br>ATCGATCG
+
+\>DNA2<br>TACGGCAG<br>GAACCTGA
+
+#### Output CSV file without the '-p' option.
+| Name      | Sequence           |
+| :---      | :---               |
+|DNA1       |  ATCGATCG          |
+|DNA2       |  TACGGCAGGAACCTGA  |
+
+#### Output CSV file with the '-p' option.
+
+| Name      | Sequence           | Length  | GC (%)   | Melting Temp  | MW (g/mol)   |
+| :---      | :---               | :---    | :---     | :---          | :---         |
+|DNA1       |  ATCGATCG          | 8       | 50       | 24            | 2409.64      |
+|DNA2       |  TACGGCAGGAACCTGA  | 16      | 56.2     | 45.9          | 4915.24      |
+
