@@ -66,3 +66,35 @@ python fast2csv.py filename.fastq [-p]
 |DNA1       |  ATCGATCG          | 8       | 50       | 24            | 2409.64      |
 |DNA2       |  TACGGCAGGAACCTGA  | 16      | 56.2     | 45.9          | 4915.24      |
 
+The same information is output if the input is a FastQ file.
+
+### Notes and Limitations
+#### Input file
+- A .fasta or .fastq file.
+  - The extension must end with ".fasta", ".fa", '.fas", ".fna", ".faa" for FastA files.
+  - The extension must end with ".fastq", ".fq" for FastQ files.
+  - Other extensions, including ".txt" files will not work.
+  - Non UTF-8 characters may produce an error.
+  - Degenerate bases (N, W, S, R, etc.) will count for total length, but will affect some properties calculations.
+  - FastQ files are read in blocks of 4. If the FastQ is not properly formated, the file may not be read.
+   
+#### Properties Calculator
+- Length
+  - Any non UTF-8 character may give invalid length.
+  - Counts every nucleotide.
+
+- GC Content
+  - Counts all Guanine and Cytosines divided by total number of nucleotides.
+  - Will NOT count any degenerate bases for GC, but will include it as total number of nucleotides.
+
+- Melting Temperature
+  - For less than 14 nucleotides: Wallace rule.
+  - For more than 14 nucleotides: Tm calculator from Rosalind.bio.
+  - Any degerate bases will not be included in the Tm calculation.
+
+- Molecular Weight
+  - Calculates the molecular weight besed on the sequence assuming no 5' or 3' phosphate.
+  - All degenerate bases will be counted as "N" and will use the average MW for DNA nucleotides.
+
+
+Please let me know if you encounter any bugs or have any concerns about the calculations.
